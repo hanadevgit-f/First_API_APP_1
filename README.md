@@ -1,32 +1,34 @@
 # First_API_APP_1
-for api learning
-열린 국회 정보 api를 이용해
-최대한 실시간으로 현재 국회에서 발의된 법안, 발의자 목록, 법안마다 발의자 성향 등을 포함해서 안드로이드 앱으로 개발, 구현
+## 프로젝트 구조
+```
+First_API_APP_1/
+├── app/
+│   ├── build.gradle
+│   └── src/
+├── build.gradle
+├── gradle/
+│   └── wrapper/
+├── gradle.properties
+├── gradlew*
+├── gradlew.bat
+├── local.properties.example
+└── settings.gradle
+```
 
-Use the Open National Assembly Information API to develop and implement an Android app that provides real-time updates on currently proposed bills in the National Assembly, including the list of proposers and the political orientation of each bill.
+## 실행 방법
+1. `local.properties.example` 파일을 복사하여 `local.properties`를 생성하고, Android SDK 경로와 API 키 등 환경별 값을 입력합니다.
+2. Gradle wrapper 스크립트(`./gradlew`)를 이용해 프로젝트를 동기화하거나 빌드합니다.
+3. Android Studio에서 프로젝트 루트를 열고 필요에 따라 에뮬레이터 또는 실제 기기에서 실행합니다.
 
-실행 
-파일에 app폴더 생성. app폴더에 build.gradle, scr.zip 압축해제 , build 폴더 생성
-build 파일에 generated, intermediates, kotlin, outputs, snapshot, tmp(.zip)압축해제. 
-나머지전체 파일, 상위 폴더에 zip해제
-=> 전체 파일을 포함한 폴더를 android studio에서 실행. 갤럭시환경에서 테스트 실행.
+## 환경 변수
+`local.properties`에서 다음 항목을 설정할 수 있습니다.
+- `VFOR_BASE_URL`
+- `VFOR_API_KEY`
+- `VFOR_AGE`
+- `VFOR_PSIZE`
+- `info1`
+- `info2`
 
-Execution steps:
-
-1. Create an app folder in the project directory.
-
-2. Place the build.gradle file and extract the contents of src.zip into the app folder.
-
-3. Create a build folder and extract the following subfolders inside it:
-
-generated
-intermediates
-kotlin
-outputs
-snapshot
-tmp (unzip the .zip file here)
-
-4. Extract all remaining files and upper-level folders from the provided ZIP package.
-
-5. Open the entire project folder in Android Studio and run it on a Galaxy device for testing.
-
+## Development Notes
+- API 키와 개인 환경 설정은 `local.properties`에 보관하고 버전 관리에는 포함하지 않습니다.
+- 빌드 산출물(`build/`, `.gradle/` 등)은 `.gitignore`로 관리하여 저장소를 깔끔하게 유지합니다.
