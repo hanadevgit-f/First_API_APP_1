@@ -32,3 +32,6 @@ First_API_APP_1/
 ## Development Notes
 - API 키와 개인 환경 설정은 `local.properties`에 보관하고 버전 관리에는 포함하지 않습니다.
 - 빌드 산출물(`build/`, `.gradle/` 등)은 `.gitignore`로 관리하여 저장소를 깔끔하게 유지합니다.
+
+## 개발 목표
+ - 애플리케이션 개발 및 api 발급 및 활용 연습을 위함.
