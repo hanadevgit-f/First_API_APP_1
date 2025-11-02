@@ -1,94 +1,19 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-android {
-    namespace 'com.vforkorea.app'
-    compileSdk 34
-
-    defaultConfig {
-        applicationId "com.vforkorea.app"
-        minSdk 24
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
-
-        // Load properties from local.properties for API configuration
-        def props = new Properties()
-        def localFile = rootProject.file("local.properties")
-        if (localFile.exists()) {
-            props.load(new FileInputStream(localFile))
-        }
-        def baseUrl = props.getProperty("VFOR_BASE_URL", "")
-        def apiKey  = props.getProperty("VFOR_API_KEY", "")
-        def age     = props.getProperty("VFOR_AGE", "")
-        def psize   = props.getProperty("VFOR_PSIZE", "")
-        def info1   = props.getProperty("info1", "")
-        def info2   = props.getProperty("info2", "")
-        // Additional dataset for detailed bill information.  The user can
-        // configure this property in local.properties.  When provided, it
-        // allows the app to fetch a bill’s detailed text or other
-        // metadata from the open assembly API.  See BillsRepository for
-        // usage.
-        def info3   = props.getProperty("info3", "")
-
-        // Additional properties for optional summarization service
-        // These allow the app to call a third‑party API (such as MeaningCloud)
-        // to condense long bill texts into a few sentences.  If left blank,
-        // the summarization button in the detail screen will simply reuse
-        // the original summary from the Assembly API.
-        def summarizationBaseUrl = props.getProperty("SUMMARIZATION_BASE_URL", "https://api.meaningcloud.com/summarization-1.0")
-        def summarizationApiKey  = props.getProperty("MEANINGCLOUD_KEY", "")
-        def summarizationLang    = props.getProperty("SUMMARIZATION_LANG", "ko")
-        def summarizationSentences = props.getProperty("SUMMARIZATION_SENTENCES", "3")
-        buildConfigField "String", "VFOR_BASE_URL", "\"${baseUrl}\""
-        buildConfigField "String", "VFOR_API_KEY",  "\"${apiKey}\""
-        buildConfigField "String", "VFOR_AGE",      "\"${age}\""
-        buildConfigField "String", "VFOR_PSIZE",    "\"${psize}\""
-        buildConfigField "String", "VFOR_INFO1",    "\"${info1}\""
-        buildConfigField "String", "VFOR_INFO2",    "\"${info2}\""
-        // Expose info3 to the app via BuildConfig.  This value may be blank
-        // if the user chooses not to specify a separate dataset for bill
-        // details.  In that case, the app will simply open the DETAIL_LINK
-        // provided in the list API.
-        buildConfigField "String", "VFOR_INFO3",    "\"${info3}\""
-
-        // BuildConfig constants for the summarization service.  These values are
-        // configured via local.properties.  See README for setup.
-        buildConfigField "String", "SUMMARIZATION_BASE_URL", "\"${summarizationBaseUrl}\""
-        buildConfigField "String", "MEANINGCLOUD_API_KEY", "\"${summarizationApiKey}\""
-        buildConfigField "String", "SUMMARIZATION_LANG", "\"${summarizationLang}\""
-        buildConfigField "String", "SUMMARIZATION_SENTENCES", "\"${summarizationSentences}\""
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
     }
-
-    buildFeatures {
-        viewBinding true
-        buildConfig true
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.4.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24"
     }
 }
 
-dependencies {
-    implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.recyclerview:recyclerview:1.3.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
-    implementation 'com.google.code.gson:gson:2.10.1'
-    // Needed for viewModels() delegate in activities
-    implementation 'androidx.activity:activity-ktx:1.9.2'
-
-    // Lifecycle components for ViewModel and LiveData support
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
